@@ -1,0 +1,35 @@
+<mat-card class="compact-form-card">
+  <mat-card-title><h1>Registrieren</h1></mat-card-title>
+  <mat-card-content>
+    <ng-container *ngIf="!registrationFinished">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" fxLayout="column">
+        
+          <mat-form-field>
+            <mat-label>E-Mail-Adresse</mat-label>
+            <input matInput formControlName="email">
+            <mat-error *ngIf="registerForm.controls['email'].errors?.['email']">E-Mail-Adresse ist ungültig</mat-error>
+            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+            <!--  <mat-hint>Hint</mat-hint> -->
+          </mat-form-field>
+     
+          <mat-form-field>
+            <mat-label>Passwort</mat-label>
+            <input matInput formControlName="password">
+            <mat-error *ngIf="registerForm.controls['password'].errors?.['minlength']">Passwort muss mindestens 4
+              Zeichen
+              enthalten</mat-error>
+            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+            <mat-hint>Mind. 4 Stellen</mat-hint>
+          </mat-form-field>
+          <br>
+          <button mat-raised-button color="primary" class="button" type="submit"
+            [disabled]="!registerForm.valid">registrieren</button>
+          
+      </form>
+    </ng-container>
+
+    <ng-container *ngIf="registrationFinished">
+      <p>Die Registrierung ist abgeschlossen. Sie können sich <a routerLink="/login">hier</a> einloggen.</p>
+    </ng-container>
+  </mat-card-content>
+</mat-card>

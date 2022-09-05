@@ -1,0 +1,58 @@
+<div *ngFor="let shop of shops">
+<mat-card >
+    <mat-card-title >	        
+        <ng-container *ngIf="forms[shop.id!]" [formGroup]="forms[shop.id!]">
+        <mat-form-field [style.margin-top.em]="-1.25">
+            <input matInput formControlName="label">
+        </mat-form-field>
+        </ng-container>
+            <button *ngIf="forms[shop.id!].controls['label'].touched" mat-icon-button color="primary" (click)="saveChanges(shop)"><mat-icon>save</mat-icon></button>
+    </mat-card-title>	
+        
+    <mat-card-content>	    
+        
+        <p class="mat-hint">{{ shop.ordersCount }} Bestellungen <mat-spinner [diameter]="32" *ngIf="shop.isImportingOrders"></mat-spinner></p>
+        
+        <p class="mat-hint" *ngIf="shop.lastImportTime">
+            Letzter Import: {{ shop.lastImportTime | date:'short' }} 
+            <span *ngIf="shop.lastImportSuccessful">( {{ shop.lastImportOrdersCreated }} hinzugefügt, {{ shop.lastImportOrdersUpdated }} aktualisiert)</span>            
+            <span class="danger-color" *ngIf="!shop.lastImportSuccessful">Import fehlgeschlagen</span>
+        </p>
+
+        <p class="mat-hint" *ngIf="shop.currentApiProvider">Verknüpft mit: <strong>{{ shop.currentApiProvider }}</strong></p>
+
+        <mat-expansion-panel showToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{ shop.currentApiProvider ? "Verknüpfung ändern" : "Verknüpfung erstellen"  }}<br>
+              </mat-panel-title>              
+            </mat-expansion-panel-header>
+            <p fxLayout="row-wrap" fxLayoutGap="10">
+                <button mat-stroked-button *ngFor="let api of supportedApis" mat-button (click)="startShopAuthorization(shop.id!, api)">{{ api }}</button>    
+                <button *ngIf="shop.currentApiProvider" mat-stroked-button	color="warn" (click)="deleteApiAuth(shop)">  <mat-icon>delete</mat-icon> Verknüpfung löschen</button>    
+            </p>
+            <p>Sie müssen sich  mit Ihrem Verkäuferkonto einloggen und dieser App die Zugriffsrechte gewähren.</p>
+            
+        </mat-expansion-panel>    
+              
+    </mat-card-content>
+
+    <mat-card-footer fxLayoutAlign="space-between center">	
+        
+        <button *ngIf="shop.currentApiProvider != null" [disabled]="shop.isImportingOrders" mat-button color="primary" (click)="startImport(shop)">             
+         Import starten <mat-icon>sync</mat-icon>
+        </button>  
+
+        <button *ngIf="shop.currentApiProvider != null" [disabled]="shop.isImportingOrders" mat-button color="warn" (click)="clearShopOrders(shop)">             
+            Alle Bestellungen löschen <mat-icon>clear</mat-icon>
+           </button>  
+
+        <button mat-icon-button	color="warn" (click)="deleteShop(shop)">  <mat-icon>delete</mat-icon></button>    
+    </mat-card-footer>    
+</mat-card>
+<br>
+</div>
+
+<div>
+    <button mat-raised-button color="primary" (click)="createShop()">hinzufügen</button>
+</div>

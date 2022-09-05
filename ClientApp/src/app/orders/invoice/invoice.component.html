@@ -1,0 +1,60 @@
+<div id="document-container" *ngIf="settings">
+    <div *ngFor="let order of orders; let i=index" class="ordersContainer" style="width:197mm; padding-right:10mm;" >     
+        
+            <span style="font-size:8pt; text-decoration: underline;" [class.pdf-pagebreak-before]="i>0"> {{ settings.invoiceIssuerAddressLine }} </span><br>
+            <div [style.white-space]="'pre-line'">{{ order.billingsAddress }}</div>
+        
+ 
+        <h1 style="margin-top:2cm; margin-bottom:1cm">Rechnung</h1>
+        
+        <table style="font-size:10pt">
+            <tr style="border:0">
+                <td>Rechnungsnummer</td>
+                <td>{{ order.invoiceNumber }}</td>
+            </tr>
+            <tr style="border:0">
+                <td>Rechnungsdatum</td>
+                <td>{{ order.invoiceDate | date }}</td>
+            </tr>
+            <tr style="border:0">
+                <td>Bestelldatum</td>
+                <td>{{ order.timeOrdered | date }}</td>
+            </tr>
+            <tr style="border:0">
+                <td>Referenz</td>
+                <td>{{ order.orderNumber}}</td>
+            </tr>
+        </table>
+
+        <p></p>
+
+        <table style="text-align:right; font-size:10pt" border="1">
+            <tr >
+                <th >Pos</th>
+                <th style="width:10cm; text-align:left">Artikel</th>
+                <th>Anzahl</th>
+                <th>Preis</th>
+                <th>Summe</th>
+            </tr>
+
+            <tr *ngFor="let item of order.items; let i=index">
+                <td>{{ i+1 }}</td>
+                <td style="text-align:left">{{ item.title }}<br><span *ngIf="item.variation" [style.font-size.pt]="8">{{ item.variation }}</span></td>
+                <td>{{ item.quantity }}</td> 
+                <td>{{ item.price | currency:order.currencyCode}} </td>
+                <td>{{ item.price * item.quantity | currency:order.currencyCode }}</td>
+            </tr>
+            <tr> </tr>
+            <tr style="border:0"><td colSpan="4">Gesamt Netto</td> <td> {{ getNetTotal(order) | currency:order.currencyCode }}</td></tr>
+            <tr style="border:0"><td colSpan="4">Umsatzsteuer ({{ settings.defaultSalesTaxPercent }}%)</td> <td> {{ getVatTotal(order) | currency:order.currencyCode }}</td></tr>
+            <tr style="border:0; font-weight:bold"><td colSpan="4">Gesamtsumme</td> <td> {{ order.grandTotal | currency:order.currencyCode }}</td></tr>             
+        </table>
+
+        <span style="page-break-after:always">{{ settings.invoiceBodyText}}</span >
+        
+    </div>
+</div>
+<hr>
+<button mat-icon-button (click)="downloadPdf()">
+    <mat-icon>download</mat-icon>
+</button>

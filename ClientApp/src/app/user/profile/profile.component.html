@@ -1,0 +1,51 @@
+<section>
+      <form *ngIf="settingsForm != null" [formGroup]="settingsForm" (ngSubmit)="updateProfile()">
+        <h1>Einstellungen für Rechnungsdokumente</h1>
+
+        <mat-form-field>
+            <mat-label>Nächste Rechnungsnummer</mat-label>
+            <input type="number" matInput formControlName="nextInvoiceNumber">
+        </mat-form-field>
+        <br>
+
+        <mat-form-field>
+            <mat-label>Umsatzsteuer auf Rechnungen (%)</mat-label>
+            <input type="number" matInput formControlName="defaultSalesTaxPercent">
+        </mat-form-field>
+        <br>
+
+        <mat-form-field>
+            <mat-label>Adresse Rechnungsaussteller</mat-label>
+            <input matInput formControlName="invoiceIssuerAddressLine">
+        </mat-form-field>
+        <br>
+
+        <mat-form-field>
+            <mat-label>Zusatztext</mat-label>
+            <textarea matInput formControlName="invoiceBodyText" rows="4"></textarea>
+            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+            <!--  <mat-hint>Hint</mat-hint> -->
+        </mat-form-field>
+        <br>
+        <!-- <mat-form-field>
+                <mat-label>Fußzeile</mat-label>
+                <input matInput formControlName="invoiceFooterText">
+            </mat-form-field> -->
+
+        <div>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!settingsForm.valid">Speichern</button>
+        </div>
+
+    </form>
+</section>
+<!-- 
+<hr>
+<section>
+    <h2>List of Claims</h2>
+    <ul>
+        <li *ngFor="let claim of claims">
+            {{claim['type']}} : {{claim['value']}}
+        </li>
+    </ul>
+
+</section>-->

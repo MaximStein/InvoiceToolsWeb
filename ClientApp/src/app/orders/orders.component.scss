@@ -1,0 +1,61 @@
+table {
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  tr {
+
+  /*  &:hover {
+      .actions-cell {
+        display: flex !important;
+      }
+    }
+
+    .actions-cell {
+      display: none !important;
+    } */
+
+    &:hover {
+      .actions-cell {
+        display:initial !important;
+      }  
+    }
+    .actions-cell {
+      position:absolute;
+      display:none;
+      .mat-button,.mat-icon-button {
+        width:initial !important;
+      }
+    }
+  }
+
+
+
+ .ellipsis-cell {
+    overflow: hidden;
+    width:auto;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+
+    &:hover {
+      //text-overflow: initial;
+      z-index: 100;
+      overflow: initial;
+      position: relative;
+      span {
+        background-color:rgba(255,255,255,.8);
+      }
+    }
+  }
+
+  .mat-row:hover .mat-cell {
+   // border-color: currentColor;
+  }
+
+  .mat-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+    padding: 5px 5px 5px 0;
+  }

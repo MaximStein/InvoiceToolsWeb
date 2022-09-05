@@ -1,0 +1,16 @@
+﻿<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center" >
+  <button mat-icon-button (click)="sideNavOpened = !sideNavOpened"><mat-icon>menu</mat-icon></button>
+  
+</mat-toolbar>
+<mat-sidenav-container fullscreen [style.margin-top.px]="64">
+  <mat-sidenav  mode="side" [opened]="sideNavOpened" >
+    
+    <app-menu></app-menu>
+  </mat-sidenav>
+  <mat-sidenav-content>    
+    <div class="container" [style.padding.px]="10">
+		  <router-outlet></router-outlet>            
+    </div>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

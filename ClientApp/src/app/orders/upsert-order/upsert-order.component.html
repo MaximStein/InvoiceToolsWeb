@@ -1,0 +1,123 @@
+<!-- <button mat-icon-button type='button'	color="primary" (click)="goBackEvent.emit()">  <mat-icon>arrow_back</mat-icon></button>  -->
+
+<h2 *ngIf="order?.id">Bestellung {{ order.orderNumber }} bearbeiten</h2>
+<h2 *ngIf="!order?.id">Neue Bestellung anlegen</h2>
+
+<form *ngIf="form != null" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <div fxLayout="column">
+    <mat-form-field>
+      <mat-label>Shop</mat-label>
+      <mat-select formControlName="shopId">
+        <mat-option *ngFor="let shop of availableShops" [value]="shop.id">
+          {{shop.label}}
+        </mat-option>
+      </mat-select>
+      
+      
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>Bestellnummer</mat-label>
+      <input matInput formControlName="orderNumber">
+      <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+      <!--  <mat-hint>Hint</mat-hint> -->
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Bestellt am</mat-label>
+      <input matInput [matDatepicker]="orderTimePicker" formControlName="timeOrdered">
+      <mat-hint>TT.MM.JJJJ</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="orderTimePicker" ></mat-datepicker-toggle>
+      <mat-datepicker #orderTimePicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Versendet am</mat-label>
+      <input matInput [matDatepicker]="shippedTimePicker" formControlName="timeShipped">
+      
+      <mat-datepicker-toggle matSuffix [for]="shippedTimePicker" ></mat-datepicker-toggle>
+      <mat-datepicker #shippedTimePicker></mat-datepicker>
+    </mat-form-field>
+
+    
+
+
+    <mat-form-field>
+      <mat-label>Rechnungsnummer</mat-label>
+      <input matInput type="number" formControlName="invoiceNumber">      
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Rechnungsdatum</mat-label>
+      <input matInput [matDatepicker]="invoiceDatePicker" formControlName="invoiceDate">      
+      <mat-datepicker-toggle matSuffix [for]="invoiceDatePicker" ></mat-datepicker-toggle>
+      <mat-datepicker #invoiceDatePicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Lieferadresse</mat-label>
+      <textarea matInput formControlName="shippingAddress" rows="5"></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Rechnungsadresse</mat-label>
+      <textarea matInput formControlName="billingAddress" rows="5"></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Währung</mat-label>
+      <input matInput formControlName="currencyCode">
+    </mat-form-field>
+
+    <div class="mat-form-field">
+        
+      <mat-checkbox formControlName="isPaid">   
+        Ist Bezahlt
+      </mat-checkbox>      
+    </div>    
+
+    <hr>
+    <div>
+      <h2>Artikel</h2>
+
+      <ng-container formArrayName="items">
+        <mat-card *ngFor="let lineItemForm of lineItems.controls; let i = index" [style.margin-bottom.px]="10">
+          <ng-container [formGroupName]="i" >
+          <div class="line-item-form-row" fxLayoutGap="10">
+            <mat-form-field fxFlex="grow">
+              <mat-label>Bezeichnung</mat-label>
+              <input matInput formControlName="title">
+            </mat-form-field>
+
+            <mat-form-field [style.width.px]="70">
+              <mat-label>Preis</mat-label>
+              <input type="number" matInput formControlName="price">
+            </mat-form-field>
+            <mat-form-field [style.width.px]="70">
+              <mat-label>Anzahl</mat-label>
+              <input type="number" matInput formControlName="quantity">
+            </mat-form-field>
+            
+            <button mat-icon-button type='button'	color="primary" (click)="deleteLineItem(i)">  <mat-icon>delete</mat-icon></button>              
+           </div>
+           
+            <mat-form-field fxFill>
+              <mat-label>Variation</mat-label>
+              <input matInput formControlName="variation">
+            </mat-form-field>
+           
+          </ng-container>
+        </mat-card>
+        </ng-container>
+
+    <button mat-icon-button type='button'	color="primary" (click)="addLineItemClick()">  <mat-icon>add</mat-icon></button>  
+
+    </div>
+    
+
+  </div>
+  <br>
+  <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Speichern</button>
+  
+</form>
+

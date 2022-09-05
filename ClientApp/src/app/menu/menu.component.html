@@ -1,0 +1,52 @@
+<mat-nav-list class="app-sidenav">
+  <ng-container *ngIf="!authService.isUserAuthenticated()">
+    <a mat-list-item class="nav-link" [routerLink]="['/register']" routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}">
+      <mat-icon matListIcon>person_add</mat-icon>
+      Registrieren
+    </a>
+
+    <a mat-list-item class="nav-link" [routerLink]="['/login']" routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}">
+
+      <mat-icon matListIcon>login</mat-icon>
+      Login
+    </a>
+  </ng-container>
+
+  <ng-container *ngIf="authService.isUserAuthenticated()">
+    <a mat-list-item class="nav-link" [routerLink]="['/profile']" routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}">
+      <mat-icon matListIcon>manage_accounts</mat-icon>
+      Einstellungen
+
+    </a>
+
+    <a mat-list-item class="nav-link" [routerLink]="['/orders']" routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}">
+
+      <mat-icon matListIcon>receipt_long</mat-icon>
+      Bestellungen
+    </a>
+
+
+    <a mat-list-item class="nav-link" [routerLink]="['/shops']" routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}">
+
+      <mat-icon matListIcon>store</mat-icon>
+      Shops
+    </a>
+
+    <a mat-list-item class="nav-link" (click)="logout()" routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}">
+      <mat-icon matListIcon>logout</mat-icon>
+      Logout
+    </a>
+
+  </ng-container>
+  <a mat-list-item class="nav-link" [routerLink]="['/']" routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: true}">
+    <mat-icon matListIcon>info</mat-icon>
+    Über diese App
+  </a>
+</mat-nav-list>
