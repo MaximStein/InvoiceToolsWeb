@@ -5,7 +5,9 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "ClientApp", "ClientApp\ClientApp.esproj", "{B8CE90F8-DE45-4A7A-BEC4-0FC515F7845D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend", "Backend\Backend.csproj", "{7AAE4B28-4B68-4D75-BEE1-F88F0CCD8CC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Backend", "Backend\Backend.csproj", "{7AAE4B28-4B68-4D75-BEE1-F88F0CCD8CC2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{6B3FA1F3-780A-4A9A-94FD-9CAA891DB946}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
