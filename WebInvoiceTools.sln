@@ -7,7 +7,14 @@ Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "ClientApp", "ClientApp\Clie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Backend", "Backend\Backend.csproj", "{7AAE4B28-4B68-4D75-BEE1-F88F0CCD8CC2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{6B3FA1F3-780A-4A9A-94FD-9CAA891DB946}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{31B322FB-6C35-4AE1-8F8A-9FDDA13F1175}"
+	ProjectSection(SolutionItems) = preProject
+		Screenshots\bestellungen.png = Screenshots\bestellungen.png
+		Screenshots\bestellung_bearbeiten.png = Screenshots\bestellung_bearbeiten.png
+		Screenshots\login.png = Screenshots\login.png
+		Screenshots\rechnung-pdf.png = Screenshots\rechnung-pdf.png
+		Screenshots\shops.png = Screenshots\shops.png
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
