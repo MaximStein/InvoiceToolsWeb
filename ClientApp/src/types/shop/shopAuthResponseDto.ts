@@ -1,5 +1,5 @@
 export interface ShopAuthResponseDto {
-    state:string,
+    state?:string,
     code:string,
     referrer:string,
 }

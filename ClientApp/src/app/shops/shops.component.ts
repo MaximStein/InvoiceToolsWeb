@@ -41,9 +41,9 @@ export class ShopsComponent implements OnInit {
       (<any>window.location) = (returnUrl+"&oauth_token=''&oauth_verifier=''");
     }
     
-    if (state && code) {
+    if (code) {
 
-      this.repoService.processShopAuthResponse({ state:state, code:code, referrer: referrer }).subscribe({
+      this.repoService.processShopAuthResponse({ state:state??undefined, code:code, referrer: referrer }).subscribe({
         next: r => {
           var index = this.shops.findIndex(s => s.id == shopId);
           if (index != -1)
@@ -97,10 +97,10 @@ export class ShopsComponent implements OnInit {
 
   startShopAuthorization(id: string, apiType: string) {
     this.repoService.getShopAuthorizationUrl(id, apiType).subscribe({
-      next: r => {
-        
-       // console.log(r);
+      next: r => {        
+        console.log(r);
         (<any>window.location) = (r);
+
       },
       error: e => {
         this.notificationService.showGenericError();

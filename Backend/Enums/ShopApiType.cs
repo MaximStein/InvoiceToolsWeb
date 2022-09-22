@@ -2,6 +2,6 @@
 {
     public enum ShopApiType
     {
-        Etsy, DemoTestShop
+        Etsy, Ebay, DemoTestShop
     }
 }

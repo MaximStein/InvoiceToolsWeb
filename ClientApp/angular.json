@@ -78,6 +78,7 @@
           },
           "defaultConfiguration": "development",
           "options": {
+            "disableHostCheck": true,
             "proxyConfig": "src/proxy.conf.js"
           }
         },

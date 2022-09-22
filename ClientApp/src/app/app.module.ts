@@ -7,7 +7,6 @@ import { UserComponent } from './user/user.component';
 import { RegisterComponent } from './user/register/register.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { WeatherForecastsComponent } from './weather-forecasts/weather-forecasts.component';
 import { LoginComponent } from './user/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgMaterialModule } from './ng-material.module';
@@ -46,7 +45,7 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     UserComponent,    
-    RegisterComponent, WeatherForecastsComponent, LoginComponent, ProfileComponent, MenuComponent, NotFoundComponent, ForbiddenComponent, AdminComponent, ShopsComponent, OrdersComponent, UpsertOrderComponent, InvoiceComponent, IndexComponent
+    RegisterComponent, LoginComponent, ProfileComponent, MenuComponent, NotFoundComponent, ForbiddenComponent, AdminComponent, ShopsComponent, OrdersComponent, UpsertOrderComponent, InvoiceComponent, IndexComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,ReactiveFormsModule, FormsModule,
@@ -60,7 +59,6 @@ export function tokenGetter() {
       { path: 'upsert-order', component:  UpsertOrderComponent,  canActivate: [AuthGuard] },
       { path: 'register', component: RegisterComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'weatherforecast', component: WeatherForecastsComponent },
     ]),
     JwtModule.forRoot({
       config: {

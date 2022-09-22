@@ -24,6 +24,10 @@
                 <td>Referenz</td>
                 <td>{{ order.orderNumber}}</td>
             </tr>
+            <tr *ngIf="order.paymentMethod" style="border:0">
+                <td>Zahlungsart</td>
+                <td>{{ order.paymentMethod}}</td>
+            </tr>
         </table>
 
         <p></p>

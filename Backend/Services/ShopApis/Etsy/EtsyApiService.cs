@@ -142,6 +142,7 @@ namespace Backend.Services.ShopApis.Etsy
         {
             var order = new Order()
             {
+
                 ImportedFrom = ShopApiType.Etsy,
                 OrderNumber = "" + r.receipt_id,
                 Buyer = new Person { Email = r.buyer_email, UserAccountName = "" + r.buyer_user_id, Name = r.name },

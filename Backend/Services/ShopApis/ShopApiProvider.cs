@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using Backend.Enums;
 using Backend.Services.ShopApis.Etsy;
+using Backend.Services.ShopApis.Ebay;
 
 namespace Backend.Services.ShopApis
 {
@@ -30,6 +31,8 @@ namespace Backend.Services.ShopApis
             {
                 case ShopApiType.Etsy:
                     return new EtsyApiService(_config, _httpClientFactory, _shopService, _userId);
+                case ShopApiType.Ebay:
+                    return new EbayApiService(_config, _httpClientFactory, _shopService, _userId);
                 case ShopApiType.DemoTestShop:
                     return new MockShopService(_config, _httpClientFactory, _shopService, _userId);
                 default:

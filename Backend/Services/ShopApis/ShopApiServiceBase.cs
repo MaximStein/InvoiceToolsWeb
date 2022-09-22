@@ -49,7 +49,7 @@ namespace Backend.Services.ShopApis
 
         public abstract string? GetAuthorizationUrl(string state);
 
-        public string GetReturnUrl() => "https://localhost:4200/shops";
+        public virtual string GetReturnUrl() => "https://localhost:4200/shops";
 
         public string GetOAuth2CodeVerifier(string state) => "vvkdljkejllufrvbhgeiegrnvufrhvrffnkvcknjvfid";
 
