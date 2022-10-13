@@ -8,8 +8,20 @@
     </mat-select>
   </mat-form-field>
 
-  <mat-checkbox [(ngModel)]="ordersFilter.onlyPaid" (change)="onFilterChanged()"> nur bezahlte Bestellungen</mat-checkbox>
-  <mat-checkbox [(ngModel)]="ordersFilter.onlyWithoutInvoice" (change)="onFilterChanged()"> nur ohne Rechnung</mat-checkbox>
+  <mat-checkbox [(ngModel)]="ordersFilter.onlyPaid" (change)="onFilterChanged()"> nur bezahlte Bestellungen
+  </mat-checkbox>
+  <mat-checkbox [(ngModel)]="ordersFilter.onlyWithoutInvoice" (change)="onFilterChanged()"> nur ohne Rechnung
+  </mat-checkbox>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Bestelldatum</mat-label>
+    <mat-date-range-input [rangePicker]="orderDatePicker" >
+      <input matStartDate placeholder="Start"  (dateChange)="onDateRangeFilterChanged('start', $event)" [value]="this.ordersFilter.minDateCreated">
+      <input matEndDate placeholder="Ende" (dateChange)="onDateRangeFilterChanged('end', $event)" [value]="this.ordersFilter.maxDateCreated">
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="orderDatePicker"></mat-datepicker-toggle>
+    <mat-date-range-picker #orderDatePicker (change)="onFilterChanged()"></mat-date-range-picker>
+  </mat-form-field>
   <br>
   <button mat-raised-button color="primary" type="button" (click)="loadOrders()">aktualisieren</button>
   <a [routerLink]="['/upsert-order']">

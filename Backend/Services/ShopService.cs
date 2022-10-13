@@ -153,6 +153,16 @@ namespace Backend.Services
                 filter &= builder.Eq(o => o.IsPaid, f.IsPaid.Value);
             }
 
+            if(f.MaxDateCreated != null)
+            {
+                filter &= builder.Lte(o => o.TimeOrdered, f.MaxDateCreated.Value.AddDays(1).AddSeconds(-1));
+            }
+
+            if (f.MinDateCreated != null)
+            {
+                filter &= builder.Gte(o => o.TimeOrdered, f.MinDateCreated.Value);
+            }
+
             //   filter &= Builders<Order>.Filter.Gte(x => x.OrderTime,r.StartTime);
             //   filter &= Builders<Order>.Filter.Lte(x => x.OrderTime, r.EndTime);
 

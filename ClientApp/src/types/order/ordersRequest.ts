@@ -3,6 +3,8 @@ export interface OrdersFilter {
     //endTimeMillis: number;
     //startTime:Date,
     //endTime:Date,
+    minDateCreated?: Date,
+    maxDateCreated?:Date,
     shopIds?: string[];
     onlyPaid?: boolean;
     onlyWithoutInvoice:boolean;

@@ -17,9 +17,6 @@ export class RepositoryService {
 
   constructor(private http: HttpClient) { }
 
-  
-
-
   public getShopAuthorizationUrl(shopId:string, apiType:string):Observable<any> { 
     return this.http.get("api/shoplink/auth-url", 
         { responseType:"text", params: {shopId, shopApiType:apiType}  }); 

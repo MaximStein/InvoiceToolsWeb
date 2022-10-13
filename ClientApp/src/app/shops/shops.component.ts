@@ -98,7 +98,7 @@ export class ShopsComponent implements OnInit {
   startShopAuthorization(id: string, apiType: string) {
     this.repoService.getShopAuthorizationUrl(id, apiType).subscribe({
       next: r => {        
-        console.log(r);
+        //console.log(r);
         (<any>window.location) = (r);
 
       },

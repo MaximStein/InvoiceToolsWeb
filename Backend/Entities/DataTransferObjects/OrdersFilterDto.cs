@@ -14,5 +14,8 @@
 
         public bool OnlyWithoutInvoice { get; set; }
 
+        public DateTime? MaxDateCreated { get; set; }
+
+        public DateTime? MinDateCreated { get; set; }
     }
 }

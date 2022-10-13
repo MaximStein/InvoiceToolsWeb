@@ -1,6 +1,7 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -31,7 +32,9 @@ export class OrdersComponent implements OnInit {
   
   ordersFilter:OrdersFilter = {
     onlyWithoutInvoice: true,
-    onlyPaid: true
+    onlyPaid: true,
+    minDateCreated: undefined,
+    maxDateCreated:undefined
   }
 
   totalOrders = 0;
@@ -65,6 +68,15 @@ export class OrdersComponent implements OnInit {
     });
   }
 
+  onDateRangeFilterChanged(type: string, event: MatDatepickerInputEvent<Date>) {
+    if(type =="start")
+      this.ordersFilter.minDateCreated = event.value??undefined;
+    else if(type == "end")
+      this.ordersFilter.maxDateCreated = event.value??undefined;
+
+    this.onFilterChanged();
+  }
+
   onFilterChanged() {
     this.ordersFilter.shopIds = this.filterShopSelection.selected.map(s => s.id!);
     this.router.navigate(['.'], {
@@ -72,7 +84,10 @@ export class OrdersComponent implements OnInit {
       queryParams: { 
         'filterShops': this.ordersFilter.shopIds.join(","), 
         'filterOnlyPaid':this.ordersFilter.onlyPaid, 
-        'filterOnlyWithoutInvoice':this.ordersFilter.onlyWithoutInvoice },
+        'filterOnlyWithoutInvoice':this.ordersFilter.onlyWithoutInvoice,
+        'filterMinDateCreated': this.ordersFilter.minDateCreated?.toDateString(),
+        'filterMaxDateCreated': this.ordersFilter.maxDateCreated?.toDateString()
+      },
       queryParamsHandling: 'merge'
     })
   }
@@ -158,7 +173,13 @@ export class OrdersComponent implements OnInit {
     selected.forEach(id => {
       if (id.length > 0)
         this.orderSelection.select(id);
-    })
+    });
+
+    var paramsMinDate = params.get('filterMinDateCreated');
+    this.ordersFilter.minDateCreated = (paramsMinDate ? new Date(paramsMinDate) : undefined);
+
+    var paramsMaxDate = params.get('filterMaxDateCreated');
+    this.ordersFilter.maxDateCreated = (paramsMaxDate ? new Date(paramsMaxDate) : undefined);
 
     /* this.orderSelection.selected.forEach(s => {
             var item = r.items.find(i => i.id == s.id);

@@ -8,5 +8,9 @@
         public bool? IsPaid { get; set; }
 
         public bool? HasInvoice { get; set; }
+
+        public DateTime? MaxDateCreated { get; set; }
+
+        public DateTime? MinDateCreated { get; set; }
     }
 }

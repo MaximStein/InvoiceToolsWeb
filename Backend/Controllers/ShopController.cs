@@ -154,7 +154,10 @@ namespace Backend.Controllers
 
             var filter = new OrdersFilter { ShopIds = filterDto.ShopIds, 
                 HasInvoice = filterDto.OnlyWithoutInvoice ? false : null, 
-                IsPaid =  filterDto.OnlyPaid ? true : null };
+                IsPaid =  filterDto.OnlyPaid ? true : null,
+                MinDateCreated = filterDto.MinDateCreated,
+                MaxDateCreated = filterDto.MaxDateCreated
+            };
             var orders = await _shopService.GetOrdersPageAsync(filter, pageIndex, pageSize);
             var totalCount = await _shopService.GetOrdersCountAsync(filter);
 
