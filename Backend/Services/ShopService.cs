@@ -13,9 +13,6 @@ namespace Backend.Services
 
         private readonly IMongoCollection<Order> _ordersCollection;
         private readonly UserService _userService;
-     //   private readonly ShopApiProvider _apiProvider;
-
-
 
         public ShopService(IOptions<MongoDbConfig> dbConfig, UserService userService)
         {
@@ -26,7 +23,6 @@ namespace Backend.Services
 
             _ordersCollection = mongoDatabase.GetCollection<Order>("Orders");
             _userService = userService;
-           // _apiProvider = apiProvider;
         }
 
         public async Task<List<Shop>> GetShopsAsync(string userId)
@@ -163,11 +159,6 @@ namespace Backend.Services
                 filter &= builder.Gte(o => o.TimeOrdered, f.MinDateCreated.Value);
             }
 
-            //   filter &= Builders<Order>.Filter.Gte(x => x.OrderTime,r.StartTime);
-            //   filter &= Builders<Order>.Filter.Lte(x => x.OrderTime, r.EndTime);
-
-            //FilterDefinition<Order> resultFilter = filter;
-            //FilterDefinition<Order> resultFilter = Builders<Order>.Filter.Empty; 
 
             if (f.ShopIds != null && f.ShopIds.Length>0)
             {
@@ -179,33 +170,10 @@ namespace Backend.Services
                 }
 
                 filter &= filter2;
-               // resultFilter = Builders<Order>.Filter.And(filter, filter2);
             }
 
             return filter;
         }
-
-
-
-
-
-        /*   public async Task<Shop> GetShopAsync(ObjectId shopId) =>
-           await _shopsCollection.Find(g => g.Id == shopId).FirstOrDefaultAsync();
-
-           public async Task<List<Shop>> GetShopsAsync(ObjectId userId) =>
-            await _shopsCollection.Find(g => g.UserId == userId).ToListAsync();
-
-           public async Task CreateShop(Shop newShop) =>
-               await _shopsCollection.InsertOneAsync(newShop);
-
-           public async Task UpdateShopAsync(ObjectId shopId, Shop updatedShop) =>
-               await _shopsCollection.ReplaceOneAsync(x => x.Id == shopId, updatedShop);
-
-           public async Task RemoveShopAsync(ObjectId shopId)
-           {
-               await _ordersCollection.DeleteManyAsync(order => order.ShopId == shopId);
-               await _shopsCollection.DeleteOneAsync(x => x.Id == shopId);
-           } */
 
     }
 }

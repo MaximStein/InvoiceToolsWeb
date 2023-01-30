@@ -8,7 +8,6 @@ namespace Backend.Services.ShopApis
 {
     public class ShopApiProvider
     {
-        //private Dictionary<ShopApiType, ShopApiServiceBase> _apiServices = new Dictionary<ShopApiType, ShopApiServiceBase>();
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly ApiCredentialsConfig _config;
         private readonly ShopService _shopService;
@@ -20,8 +19,6 @@ namespace Backend.Services.ShopApis
             _httpClientFactory = httpClientFactory;
             _shopService = shopService;
 
-            //_apiServices.Add(ShopApiType.Etsy, new EtsyApiService(dbConfig, httpClientFactory));
-            //_apiServices.Add(ShopApiType.MockShop, new MockShopService(dbConfig, httpClientFactory));
 
         }
 

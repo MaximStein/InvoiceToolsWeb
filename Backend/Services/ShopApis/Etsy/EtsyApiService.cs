@@ -26,8 +26,6 @@ namespace Backend.Services.ShopApis.Etsy
     {
 
 
-        private const string _apiBaseurl = "https://openapi.etsy.com/v3/";
-
         private readonly string _apiKey;
 
         public EtsyApiService(ApiCredentialsConfig apiConfig, IHttpClientFactory httpClientFactory, ShopService shopService, string userId) : 
@@ -85,28 +83,6 @@ namespace Backend.Services.ShopApis.Etsy
 
             return url;
 
-            // var response = httpClient.Send(new HttpRequestMessage(HttpMethod.Get, url));
-            /*var rng = RandomNumberGenerator.Create();
-
-            var bytes = new byte[32];
-            rng.GetBytes(bytes);
-
-            // It is recommended to use a URL-safe string as code_verifier.
-            // See section 4 of RFC 7636 for more details.
-            var code_verifier = Convert.ToBase64String(bytes)
-                .TrimEnd('=')
-                .Replace('+', '-')
-                .Replace('/', '_');
-
-            var code_challenge = string.Empty;
-            using (var sha256 = SHA256.Create())
-            {
-                var challengeBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(code_verifier));
-                code_challenge = Convert.ToBase64String(challengeBytes)
-                    .TrimEnd('=')
-                    .Replace('+', '-')
-                    .Replace('/', '_');
-            } */
         }
 
 
